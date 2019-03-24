@@ -36,13 +36,10 @@ object BindingAdapters {
      */
     @BindingAdapter("app:popularityIcon")
     @JvmStatic
-    fun popularityIcon(view: ImageView, popularity: Popularity) {
-
-        val color = getAssociatedColor(popularity, view.context)
-
-        ImageViewCompat.setImageTintList(view, ColorStateList.valueOf(color))
-
-        view.setImageDrawable(getDrawablePopularity(popularity, view.context))
+    fun popularityIcon(imageView: ImageView, popularity: Popularity) {
+        val color = getAssociatedColor(popularity, imageView.context);
+        ImageViewCompat.setImageTintList(imageView, ColorStateList.valueOf(color))
+        imageView.setImageDrawable(getDrawablePopularity(popularity, imageView.context))
     }
 
     /**
@@ -85,7 +82,7 @@ object BindingAdapters {
     private fun getAssociatedColor(popularity: Popularity, context: Context): Int {
         return when (popularity) {
             Popularity.NORMAL -> context.theme.obtainStyledAttributes(
-                intArrayOf(android.R.attr.colorForeground)
+                    intArrayOf(android.R.attr.colorForeground)
             ).getColor(0, 0x000000)
             Popularity.POPULAR -> ContextCompat.getColor(context, R.color.popular)
             Popularity.STAR -> ContextCompat.getColor(context, R.color.star)
